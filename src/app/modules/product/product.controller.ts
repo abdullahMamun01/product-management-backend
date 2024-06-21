@@ -4,7 +4,7 @@ import ProductValidationSchema from './product.validation';
 
 const addProduct = async (req: Request, res: Response) => {
   try {
-    const { product: productData } = req.body;
+    const productData = req.body;
     const zodParseData = ProductValidationSchema.parse(productData);
     const result = await ProductService.addProduct(zodParseData);
 
@@ -25,7 +25,9 @@ const addProduct = async (req: Request, res: Response) => {
 
 const getAllProduct = async (req: Request, res: Response) => {
   try {
-    const result = await ProductService.getAllProduct();
+    const searchTerm = req.query.searchTerm as string | undefined
+
+    const result = await ProductService.getAllProduct(searchTerm);
     res.status(200).json({
       success: true,
       message: 'Product retrieved successfully.',
