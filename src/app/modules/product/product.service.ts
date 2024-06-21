@@ -1,3 +1,4 @@
+import { isValidObjectId } from "mongoose";
 import { TProduct } from "./product.interface";
 import { Product } from "./product.model";
 
@@ -13,7 +14,13 @@ const getAllProduct = async () => {
 }
 
 const getSingleProduct = async(productId : string) => {
-    const product = await Product.find({_id : productId})
+    if(!isValidObjectId(productId)){
+        throw new Error("Invalid product id")
+    }
+    const product = await Product.isProductExist(productId)
+    if(!product){
+        throw new Error("product not found")
+    }
 
     return product
 }
