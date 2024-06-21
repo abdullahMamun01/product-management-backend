@@ -13,11 +13,12 @@ const addProduct = async (req: Request, res: Response) => {
       message: 'product added successfully',
       data: result,
     });
-  } catch (error: any) {
-    res.status(200).json({
+  } catch (error ) {
+    const err = error as Error
+    res.status(500).json({
       success: false,
-      message: error.message || 'something went wrong',
-      error,
+      message: err.message || 'something went wrong',
+      err,
     });
   }
 };
@@ -30,11 +31,12 @@ const getAllProduct = async (req: Request, res: Response) => {
       message: 'Product retrieved successfully.',
       data: result,
     });
-  } catch (error: any) {
-    res.status(200).json({
+  } catch (error) {
+    const err = error as Error
+    res.status(500).json({
       success: false,
-      message: error.message || 'something went wrong',
-      error,
+      message: err.message || 'something went wrong',
+      err,
     });
   }
 };
@@ -49,11 +51,12 @@ const getSingleProduct = async (req: Request, res: Response) => {
       message: 'Product retrieved successfully.',
       data: result,
     });
-  } catch (error: any) {
-    res.status(200).json({
+  } catch (error) {
+    const err = error as Error
+    res.status(500).json({
       success: false,
-      message: error.message || 'something went wrong',
-      error,
+      message: err.message || 'something went wrong',
+      err,
     });
   }
 };
@@ -75,11 +78,12 @@ const updateProduct = async (req: Request, res: Response) => {
       message: 'Product updated successfully!.',
       data: result,
     });
-  } catch (error: any) {
-    res.status(200).json({
+  } catch (error) {
+    const err = error as Error
+    res.status(500).json({
       success: false,
-      message: error.message || 'something went wrong',
-      error,
+      message: err.message || 'something went wrong',
+      err,
     });
   }
 };
@@ -93,11 +97,13 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
       message: 'Product deleted successfully!.',
       data: null,
     });
-  } catch (error: any) {
-    res.status(200).json({
+  } catch (error) {
+    const err = error as Error
+
+    res.status(500).json({
       success: false,
-      message: error.message || 'something went wrong',
-      error,
+      message: err.message || 'something went wrong',
+      err,
     });
   }
 };

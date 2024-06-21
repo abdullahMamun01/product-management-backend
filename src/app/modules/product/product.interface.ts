@@ -1,3 +1,4 @@
+import { Model } from "mongoose"
 
 
 type Variant = {
@@ -21,3 +22,7 @@ export type  TProduct = {
 
 }
 
+
+export interface ProductModel extends Model<TProduct> {
+    isProductExist(productId:string ) : Promise <TProduct | null>
+ }
